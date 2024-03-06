@@ -72,7 +72,7 @@ const LoginScreen = ({navigation}) => {
               <Text style={styles.buttonText}>0</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleClear}>
-              <MaterialIcons name="backspace" size={24} color="black" />
+              <MaterialIcons name="chat" size={24} color="black" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleDelete}>
               <MaterialIcons name="backspace" size={24} color="black" />
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  
   gradient: {
     flex: 1,
     width: '100%',
@@ -125,12 +126,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     backgroundColor: '#DDDDDD',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
+    margin:10,
+    padding:5,
   },
   buttonText: {
     fontSize: 24,

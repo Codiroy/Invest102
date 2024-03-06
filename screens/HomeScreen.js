@@ -1,198 +1,111 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+const HomeScreen = ({navigation}) => {
 
-const Drawer = createDrawerNavigator();
-
-const HomeScreen = ({ navigation }) => {
   const images = [
-    require('../images/james.png'),
-    require('../images/john.png'),
-    require('../images/peter.png'),
+    require('../assets/image4.png'),
+    require('../assets/image2.png'),
+    require('../assets/image1.png'),
   ];
 
-  const DrawerContent = (props) => (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Change Pin"
-        onPress={() => console.log('Change Pin pressed')}
-      />
-      <DrawerItem
-        label="Logout"
-        onPress={() => console.log('Logout pressed')}
-      />
-    </DrawerContentScrollView>
-  );
-
   return (
-    <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Home">
-        {() => (
-          <View style={{ flex: 1 }}>
-          <View style={{ flex: 0.25, backgroundColor: 'maroon', opacity: 0.5 }} />
-    
-          <View style={{ flex: 0.75, justifyContent: 'center', alignItems: 'center' }}>
-           <ImageSlider images={images} />
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 20 }}>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightblue',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page1')}
-              >
-                <Icon name="home" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 100,
-                  height: 100,
-                  backgroundColor: 'lightgreen',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: 5, 
-                }}
-                onPress={() => handleNavigation('Page2')}
-              >
-                <Icon name="work" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-    
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'lightgray' }}>
-            <TouchableOpacity
-              style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}
-              onPress={() => console.log('Home pressed')}
-            >
-              <Text>Home</Text>
+        <View style={styles.container}>
+          
+           <ImageSlider images={images} /> 
+           
+          <View style={styles.iconContainer}>       
+            <TouchableOpacity style={styles.statementButton}>
+              <Text style={styles.iconText}>View Statement</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}
-              onPress={() => console.log('FAQs pressed')}
-            >
-              <Text>FAQs</Text>
+            <TouchableOpacity style={styles.iconButton}>
+            <Icon name="home" size={30} color="white" />
+              <Text style={styles.iconText}>Members</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+            <Icon name='sc-telegram' type='evilicon' color='#517fa4'/>
+              <Text style={styles.iconText}>Deposits</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+            <Icon name="account_balance" size={30} color="white" />
+              <Text style={styles.iconText}>Shares</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+            <Icon name="comments" size={30} color="white" />
+              <Text style={styles.iconText}>Events</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+            <Icon name="credit_card" size={30} color="white" />
+              <Text style={styles.iconText}>Deposit Cash</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+            <Icon name="home" size={30} color="white" />
+              <Text style={styles.iconText}>Buy Shares</Text>
             </TouchableOpacity>
           </View>
-        </View>
-        )}
-      </Drawer.Screen>
-      <Drawer.Screen name="Bio Data" component={BioDataScreen} />
-      <Drawer.Screen name="Next of Kin" component={NextOfKinScreen} />
-      <Drawer.Screen name="App Info" component={AppInfoScreen} />
-    </Drawer.Navigator>
+          <View style={styles.tabContainer}>
+          <TouchableOpacity style={styles.tabButton}>
+            <Icon name="home" size={40} color="white" />
+              <Text style={styles.iconText}>Home</Text>
+            </TouchableOpacity>
+            <Text style={{fontSize:50,color:'white'}}>||</Text>
+            <TouchableOpacity style={styles.tabButton}>
+            <Icon name="chat" size={30} color="white" />
+              <Text style={styles.iconText}>Faqs</Text>
+            </TouchableOpacity>
+          </View>
+      </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+ 
+  iconContainer: {
+    flex:1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  iconButton: {
+    backgroundColor: 'maroon',
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+    borderRadius: 10,
+  },
+  statementButton: {
+    backgroundColor: 'maroon',
+    width: 340,
+    height: 70,
+    justifyContent: 'center',
+    padding:10,
+    borderRadius: 10,
+    marginBottom:20,
+  },
+  tabButton: {
+    justifyContent: 'center',
+    alignContent:'center',
+    padding:20,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'center',
+    alignContent:'center',
+    backgroundColor: 'maroon',
+  },
+  iconText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 
 export default HomeScreen;

@@ -4,14 +4,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { PieChart } from 'react-native-svg-charts';
 
 const Accountdetails = () => {
-  // Sample data for demonstration
   const data = [
     { key: 'John', value: 200 },
     { key: 'Jane', value: 300 },
     { key: 'Alice', value: 150 },
   ];
 
-  // Calculate total balance for the current month
   const totalBalance = data.reduce((acc, item) => acc + item.value, 0);
 
   return (
