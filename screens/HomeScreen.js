@@ -12,48 +12,52 @@ const HomeScreen = ({navigation}) => {
 
   return (
         <View style={styles.container}>
-          
            <ImageSlider images={images} /> 
-           
           <View style={styles.iconContainer}>       
             <TouchableOpacity style={styles.statementButton}>
               <Text style={styles.iconText}>View Statement</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-            <Icon name="home" size={30} color="white" />
+            <Icon name="group" size={30} color="white" />
               <Text style={styles.iconText}>Members</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-            <Icon name='sc-telegram' type='evilicon' color='#517fa4'/>
+            <Icon name="attach-money" size={30} color="white" />
               <Text style={styles.iconText}>Deposits</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-            <Icon name="account_balance" size={30} color="white" />
+            <Icon name="monetization-on" size={30} color="white" />
               <Text style={styles.iconText}>Shares</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-            <Icon name="comments" size={30} color="white" />
+            <Icon name="event" size={30} color="white" />
               <Text style={styles.iconText}>Events</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-            <Icon name="credit_card" size={30} color="white" />
-              <Text style={styles.iconText}>Deposit Cash</Text>
+            <Icon name="payment" size={30} color="white" />
+              <Text style={styles.iconText}>Deposit</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-            <Icon name="home" size={30} color="white" />
+            <Icon name="account-balance" size={30} color="white" />
               <Text style={styles.iconText}>Buy Shares</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.tabContainer}>
-          <TouchableOpacity style={styles.tabButton}>
-            <Icon name="home" size={40} color="white" />
-              <Text style={styles.iconText}>Home</Text>
-            </TouchableOpacity>
-            <Text style={{fontSize:50,color:'white'}}>||</Text>
-            <TouchableOpacity style={styles.tabButton}>
-            <Icon name="chat" size={30} color="white" />
-              <Text style={styles.iconText}>Faqs</Text>
-            </TouchableOpacity>
+            
+                <TouchableOpacity style={styles.btns} >
+                <Icon name="home" size={40} color="white" />
+                <Text style={styles.iconText}>Home</Text>
+                </TouchableOpacity>
+            
+              <Text style={{fontSize:50,color:'white'}}>||</Text>
+            
+                <TouchableOpacity style={styles.btns}>
+                <Icon name="question-answer" size={30} color="white" />
+                <Text style={styles.iconText}>Faqs</Text>
+                </TouchableOpacity>
+            
+            
+           
           </View>
       </View>
   );
@@ -95,13 +99,22 @@ const styles = StyleSheet.create({
     padding:20,
   },
   tabContainer: {
+    justifyContent:'space-between',
     flexDirection: 'row',
     height: 80,
-    justifyContent: 'center',
-    alignContent:'center',
     backgroundColor: 'maroon',
   },
+  btns:{
+    paddingLeft: 20,
+    backgroundColor: 'maroon',
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   iconText: {
+    justifyContent: 'center',
+    alignContent:'center',
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',

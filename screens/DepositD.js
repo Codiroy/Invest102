@@ -16,7 +16,7 @@ const DepositScreen = () => {
       .catch((error) => {
         // Handle error response from Mpesa API
         Alert.alert('Error', 'Failed to deposit funds. Please try again later.');
-      });
+      }); 
   };
 
   return (
