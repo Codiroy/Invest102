@@ -14,6 +14,7 @@ import NotificB from './screens/Notifications';
 import NotificD from './screens/Notificationdetails';
 import Pinchange from './screens/Pinchange';
 import Statement from './screens/Statements';
+import GroupChat from './screens/chats.js';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,7 @@ export default function App() {
         <Stack.Screen name='Pinchange' component={Pinchange} />
         <Stack.Screen name='Statement' component={Statement} />
         <Stack.Screen name='Shares' component={Shares} />
+        <Stack.Screen name='Chats' component={GroupChat} />
       </Stack.Navigator>
     </NavigationContainer>
   );  

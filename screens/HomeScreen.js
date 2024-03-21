@@ -14,50 +14,57 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.container}>
            <ImageSlider images={images} /> 
           <View style={styles.iconContainer}>       
-            <TouchableOpacity style={styles.statementButton}>
+            <TouchableOpacity style={styles.statementButton}
+            onPress={()=>navigation.navigate('Statement')}>
               <Text style={styles.iconText}>View Statement</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton}
+            onPress={() => navigation.navigate('Members')}>
             <Icon name="group" size={30} color="white" />
               <Text style={styles.iconText}>Members</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} 
+            onPress={() => navigation.navigate('Accountdetails')}>
             <Icon name="attach-money" size={30} color="white" />
               <Text style={styles.iconText}>Deposits</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton}
+            onPress={() => navigation.navigate('Shares')}>
             <Icon name="monetization-on" size={30} color="white" />
               <Text style={styles.iconText}>Shares</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton}
+            onPress={() => navigation.navigate('Members')}>
             <Icon name="event" size={30} color="white" />
               <Text style={styles.iconText}>Events</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton}
+            onPress={()=>navigation.navigate('Deposit')}>
             <Icon name="payment" size={30} color="white" />
               <Text style={styles.iconText}>Deposit</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton}
+            onPress={() => navigation.navigate('DepositShares')}>
             <Icon name="account-balance" size={30} color="white" />
               <Text style={styles.iconText}>Buy Shares</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.tabContainer}>
-            
-                <TouchableOpacity style={styles.btns} >
+          <View style={styles.tabContainer}>    
+                <TouchableOpacity style={styles.btns} 
+                onPress={() => navigation.navigate('Home')} >
                 <Icon name="home" size={40} color="white" />
                 <Text style={styles.iconText}>Home</Text>
                 </TouchableOpacity>
             
               <Text style={{fontSize:50,color:'white'}}>||</Text>
             
-                <TouchableOpacity style={styles.btns}>
+                <TouchableOpacity style={styles.btns}
+                onPress={() => navigation.navigate('Chats')}
+                >
                 <Icon name="question-answer" size={30} color="white" />
                 <Text style={styles.iconText}>Faqs</Text>
+                
                 </TouchableOpacity>
-            
-            
-           
           </View>
       </View>
   );
@@ -102,10 +109,10 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     flexDirection: 'row',
     height: 80,
+    paddingHorizontal: 16,
     backgroundColor: 'maroon',
   },
   btns:{
-    paddingLeft: 20,
     backgroundColor: 'maroon',
     width: 100,
     height: 100,

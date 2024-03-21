@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import the FontAwesome icon set
+import { View, TextInput, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 
 const GroupChat = () => {
   const [message, setMessage] = useState('');
@@ -15,9 +15,7 @@ const GroupChat = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Group Chat</Text>
-      </View>
+      
       <FlatList
         data={messages}
         renderItem={({ item }) => (
@@ -36,9 +34,10 @@ const GroupChat = () => {
           multiline
         />
         <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
-          <Icon name="send" size={20} color="white" /> {/* Native icon */}
+          <Icon name="send" size={20} color="white" />
         </TouchableOpacity>
       </View>
+      
     </View>
   );
 };
@@ -86,7 +85,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    margin: 5,
+    margin: 5,   
+    fontSize: 25,
   },
   otherMessage: {
     alignSelf: 'flex-start',
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     margin: 5,
+    fontSize: 25,
   },
 });
 
