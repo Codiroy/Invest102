@@ -2,14 +2,52 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
+import DeviceInfo from 'react-native-device-info';
 
 const LoginScreen = ({navigation}) => {
   const [pin, setPin] = useState('');
+  const [deviceId, setDeviceId] = useState('');
 
-  const handlePinChange = (value, index) => {
-    const newPin = pin.slice(0, index) + value + pin.slice(index + 1);
-    setPin(newPin);
+  useEffect(() => {
+    async function fetchDeviceInfo() {
+      const id = await DeviceInfo.getUniqueId();
+      setDeviceId(id);
+    }
+
+    fetchDeviceInfo();
+  }, []);
+
+  const handlePinChange = async (value, index) => {  
+    if(pin.length<4){
+        const newPin = pin.slice(0, index) + value + pin.slice(index + 1);
+        setPin(newPin);
+        try {
+          const response = await fetch('localhost/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+          });
+    
+          const data = await response.json();
+    
+          if (response.ok) {
+            // Login successful, handle further actions here
+            console.log('Login successful:', data);
+          } else {
+            // Login failed, display error message
+            console.error('Login failed:', data.error);
+            Alert.alert('Login failed', 'Invalid username or password');
+          }
+        } catch (error) {
+          console.error('Error occurred during login:', error);
+          Alert.alert('Error', 'An error occurred while trying to login. Please try again later.');
+        }
+      }
+      
   };
+
 
   const handleDelete = () => {
     setPin(pin.slice(0, -1));
@@ -17,7 +55,11 @@ const LoginScreen = ({navigation}) => {
 
   const handleLogin = () => {
     // Handle login logic here
-    console.log('Logging in with pin:', pin);
+    if(pin.length==4){
+      console.log('Logging in with pin:', pin,' and device id:', deviceId);
+    } else{
+      console.log('incomplete password:');
+    }
   };
 
   const handleClear = () => {
@@ -72,7 +114,7 @@ const LoginScreen = ({navigation}) => {
               <Text style={styles.buttonText}>0</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleClear}>
-              <MaterialIcons name="chat" size={24} color="black" />
+            <Text style={styles.buttonText}>C</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleDelete}>
               <MaterialIcons name="backspace" size={24} color="black" />

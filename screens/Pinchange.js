@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
-const Pinchange = () => {
+const Pinchange = ({navigation}) => {
   const [accountOwnerInfo, setAccountOwnerInfo] = useState({
     name: 'John Doe',
     age: 30,

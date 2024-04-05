@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,6 +9,7 @@ const HomeScreen = ({navigation}) => {
     require('../assets/image2.png'),
     require('../assets/image1.png'),
   ];
+
 
   return (
         <View style={styles.container}>
