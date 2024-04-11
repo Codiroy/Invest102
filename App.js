@@ -7,7 +7,7 @@ import {
 import { useState,useEffect } from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import { AsyncStorage } from 'react-native'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Entypo';
 import DrawerContent from './DrawerContent';
 import HomeScreen from './screens/HomeScreen';
@@ -17,6 +17,7 @@ import Biodata from "./screens/Biodata";
 import DepositD from './screens/DepositD';
 import DepositS from './screens/DepositS';
 import LoginScreen from './screens/Login';
+import Activate from './screens/Activate';
 import Shares from './screens/Myshares';
 import NotificB from './screens/Notifications';
 import NotificD from './screens/Notificationdetails';
@@ -24,22 +25,7 @@ import Pinchange from './screens/Pinchange';
 import Statement from './screens/Statements';
 import GroupChat from './screens/chats.js';
 
-
-
 const StackNav = () => {
-  const [isLoggedin,setLoggedin]=useState(false);
-
-  useEffect(()=>{
-    const checkauth=async()=>{
-      const token=await AsyncStorage.getItem('token');
-      if(token){
-        setLoggedin(true);
-      }else{
-        setLoggedin(false);
-      }
-    };
-    checkauth();
-  },[])
 
   const Stack = createNativeStackNavigator();
   const navigation = useNavigation();
@@ -53,8 +39,7 @@ const StackNav = () => {
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
       }}>
-        {
-        isLoggedin?(<Stack.Screen
+        <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -69,19 +54,11 @@ const StackNav = () => {
             );
           },
         }}
-      />):(<Stack.Screen name='LoginScreen' component={LoginScreen} />)
-        }
-      
-      <Stack.Screen
-        name="Biodata"
-        component={Biodata}
-        options={{
-          headerShown: true,
-        }}
       />
-       <Stack.Screen name="Members" component={Members} />
-        
-        <Stack.Screen name="Accountdetails" component={Accountdetails} />
+        <Stack.Screen name='LoginScreen' component={Loginnav} />
+        <Stack.Screen name="Biodata" component={Biodata} options={{headerShown: true,}}/>
+        <Stack.Screen name='Members' component={Members} />
+        <Stack.Screen name='Accountdetails' component={Accountdetails} />
         <Stack.Screen name='Deposit' component={DepositD} />
         <Stack.Screen name='DepositShares' component={DepositS} />
         <Stack.Screen name='Notifics' component={NotificB} />
@@ -106,10 +83,43 @@ const DrawerNav = () => {
     </Drawer.Navigator>
   );
 };
+
+const Loginnav = () => {
+  
+  const Stack = createNativeStackNavigator();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown:false,
+        statusBarColor: '#800000',
+        headerStyle: {
+          backgroundColor: '#800000',
+        },
+        headerTintColor: '#fff',
+        headerTitleAlign: 'center',
+      }}>
+        <Stack.Screen name='LoginScreen' component={LoginScreen} /> 
+        <Stack.Screen name='Home' component={DrawerNav} />
+        <Stack.Screen name='Activate' component={Activate} />
+    </Stack.Navigator>
+  );
+};
+
 function App() {
+  const [isLoggedin,setisLoggedin]=useState(false);
+  
+  async function getdata(){
+    const data=await AsyncStorage.getItem('userData');    
+    setisLoggedin(data);
+  }
+
+  useEffect(()=>{
+    getdata();
+  },[])
+
    return (
     <NavigationContainer>
-      <DrawerNav />
+      {isLoggedin?(<DrawerNav />):(<Loginnav />)}   
     </NavigationContainer>
   );
 }

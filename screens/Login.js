@@ -1,64 +1,72 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { View, Text, Alert, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView,ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
-import DeviceInfo from 'react-native-device-info';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const LoginScreen = ({navigation}) => {
   const [pin, setPin] = useState('');
-  const [deviceId, setDeviceId] = useState('');
-
-  useEffect(() => {
-    async function fetchDeviceInfo() {
-      const id = await DeviceInfo.getUniqueId();
-      setDeviceId(id);
+  const [Phone,setPhone]=useState('');
+  const [loginData,setLoginData]=useState({PhoneNumber:'07089',pin});
+  const [loading, setLoading] = useState(false);
+  async function getActivation(){
+    const data=await AsyncStorage.getItem('active');    
+    setPhone('0707856745');
+    if(Phone==''){
+      console.log(Phone);
+      navigation.navigate('Activate');
     }
+  }
 
-    fetchDeviceInfo();
-  }, []);
+  useEffect(()=>{
+    getActivation();
+  },[])
 
-  const handlePinChange = async (value, index) => {  
+  const handlePinChange = (value, index) => {  
     if(pin.length<4){
         const newPin = pin.slice(0, index) + value + pin.slice(index + 1);
         setPin(newPin);
-        try {
-          const response = await fetch('localhost/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-          });
-    
-          const data = await response.json();
-    
-          if (response.ok) {
-            // Login successful, handle further actions here
-            console.log('Login successful:', data);
-          } else {
-            // Login failed, display error message
-            console.error('Login failed:', data.error);
-            Alert.alert('Login failed', 'Invalid username or password');
-          }
-        } catch (error) {
-          console.error('Error occurred during login:', error);
-          Alert.alert('Error', 'An error occurred while trying to login. Please try again later.');
-        }
+        setPhone('0720037976');
       }
-      
   };
-
 
   const handleDelete = () => {
     setPin(pin.slice(0, -1));
   };
 
-  const handleLogin = () => {
-    // Handle login logic here
+  const handleLogin = async () => {
     if(pin.length==4){
-      console.log('Logging in with pin:', pin,' and device id:', deviceId);
-    } else{
+      setLoginData({ PhoneNumber: Phone, Password: pin })
+      setLoading(true);
+      console.log('Logging in with pin:', pin,' and device id:', Phone);
+      try {
+        //http://10.0.2.2:4000/login
+        const response = await fetch('http://192.168.0.109:4000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginData),
+        });
+        const responseData = await response.json();
+        if (response.ok) {
+          AsyncStorage.setItem('isLoggedin',JSON.stringify(true));
+          AsyncStorage.setItem('userData',responseData );
+          console.log('data',responseData.Surname);
+          Alert.alert('Login successfull', 'Login successfull');
+          navigation.navigate('Home');
+        } else {
+          Alert.alert('Login failed', 'wrong pin, please try again');
+        }
+        console.log('data',responseData);      
+    }catch (error) {
+      console.error('Error logging in:', error);
+      Alert.alert('Login failed', 'Server cannot be reached');
+    }setLoading(false); }
+      else{
       console.log('incomplete password:');
+     // Alert.alert('Login Failed', 'Wrong pin.');
     }
   };
 
@@ -66,6 +74,13 @@ const LoginScreen = ({navigation}) => {
     setPin('');
   };
 
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#800000"/>
+      </View>
+    );
+  }
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <LinearGradient

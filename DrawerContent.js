@@ -1,10 +1,13 @@
-import React from 'react';
+import React,  { useState,useEffect } from 'react';
+
 import {View, StyleSheet, Text} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {Avatar, Title} from 'react-native-paper';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { BackHandler } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DrawerList = [
   {icon: 'home-outline', label: 'Home', navigateTo: 'Home'},
@@ -12,6 +15,10 @@ const DrawerList = [
   {icon: 'account-group', label: 'Pin Change', navigateTo: 'Pinchange'},
   //{icon: 'bookshelf', label: 'Library', navigateTo: ''},
 ];
+
+
+
+
 const DrawerLayout = ({icon, label, navigateTo}) => {
   const navigation = useNavigation();
   // console.log(userData);
@@ -38,7 +45,16 @@ const DrawerItems = props => {
       );
     });
   };
+  
+
 function DrawerContent(props) {
+  const navigation=useNavigation();
+  const logout = () => {
+    AsyncStorage.setItem('isLoggedin','');
+    AsyncStorage.setItem('token','');
+    navigation.navigate('LoginScreen');
+  };
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -54,9 +70,9 @@ function DrawerContent(props) {
                   style={{marginTop: 5}}
                 />
                 <View style={{marginLeft: 10, flexDirection: 'column'}}>
-                  <Title style={styles.title}>Allan</Title>
+                  <Title style={styles.title}>Edwin </Title>
                   <Text style={styles.caption} numberOfLines={1}>
-                    opiliallan@gmail.com
+                    kapgenedwin@gmail.com
                   </Text>
                 </View>
               </View>
@@ -69,6 +85,7 @@ function DrawerContent(props) {
       </DrawerContentScrollView>
       <View style={styles.bottomDrawerSection}>
         <DrawerItem
+          onPress={logout}
           icon={({color, size}) => (
             <Icon name="exit-to-app" color={color} size={size} />
           )}

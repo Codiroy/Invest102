@@ -35,7 +35,7 @@ const HomeScreen = ({navigation}) => {
               <Text style={styles.iconText}>Shares</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}
-            onPress={() => navigation.navigate('Members')}>
+            onPress={() => navigation.navigate('LoginScreen')}>
             <Icon name="event" size={30} color="white" />
               <Text style={styles.iconText}>Events</Text>
             </TouchableOpacity>

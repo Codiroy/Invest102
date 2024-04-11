@@ -33,7 +33,7 @@ const DepositScreen = () => {
         value={phoneNumber}
         onChangeText={(text) => setPhoneNumber(text)}
       />
-      <Button title="Deposit" onPress={handleDeposit} />
+      <Button title="Deposit" style={{backgroundColor: '#800000'}} onPress={handleDeposit} />
     </View>
   );
 };
